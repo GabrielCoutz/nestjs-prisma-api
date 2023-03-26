@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { PrismaService } from 'src/services/prisma.service';
 import { User } from 'src/user/entities/user.entity';
+import { userDefaultSelect } from './selects/user-default-select';
 
 @Injectable()
 export class UserRepository {
@@ -14,9 +15,18 @@ export class UserRepository {
         password,
         name,
       },
+      select: userDefaultSelect,
     });
 
     return user;
+  }
+
+  async getAll() {
+    const users = await this.database.user.findMany({
+      select: userDefaultSelect,
+    });
+
+    return users;
   }
 
   async findBy(where: Prisma.UserWhereInput): Promise<number> {
