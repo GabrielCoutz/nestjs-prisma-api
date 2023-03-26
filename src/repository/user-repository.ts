@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { Prisma } from '@prisma/client';
 import { PrismaService } from 'src/services/prisma.service';
 import { User } from 'src/user/entities/user.entity';
 
@@ -16,5 +17,13 @@ export class UserRepository {
     });
 
     return user;
+  }
+
+  async findBy(where: Prisma.UserWhereInput): Promise<number> {
+    const result = await this.database.user.count({
+      where,
+    });
+
+    return result;
   }
 }

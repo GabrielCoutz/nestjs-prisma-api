@@ -1,15 +1,28 @@
-import { Injectable } from '@nestjs/common';
+import { ConflictException, Injectable } from '@nestjs/common';
 import { UserRepository } from 'src/repository/user-repository';
+import { PasswordService } from 'src/services/password/password.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 
 @Injectable()
 export class UserService {
-  constructor(private readonly userRepository: UserRepository) {}
-  async create(createUserDto: CreateUserDto) {
-    const user = await this.userRepository.create(createUserDto);
+  constructor(
+    private readonly userRepository: UserRepository,
+    private readonly passwordService: PasswordService,
+  ) {}
 
-    return user;
+  async create({ email, name, password }: CreateUserDto) {
+    const userAlreadyExists = await this.userRepository.findBy({ email });
+    if (userAlreadyExists)
+      throw new ConflictException('This email already in use');
+
+    const user = await this.userRepository.create({
+      email,
+      name,
+      password: await this.passwordService.hash(password),
+    });
+
+    return { id: user.id };
   }
 
   findAll() {
