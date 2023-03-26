@@ -29,6 +29,18 @@ export class UserService {
     return { id: user.id };
   }
 
+  async update(id: string, payload: UpdateUserDto) {
+    const userExists = await this.userRepository.findBy({ id });
+    if (!userExists) throw new NotFoundException('User not found');
+
+    if (payload.password)
+      payload.password = await this.passwordService.hash(payload.password);
+
+    const user = await this.userRepository.update(id, payload);
+
+    return user;
+  }
+
   async findAll() {
     const users = await this.userRepository.getAll();
 
@@ -40,10 +52,6 @@ export class UserService {
     if (!user) throw new NotFoundException('User not found');
 
     return user;
-  }
-
-  update(id: string, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
   }
 
   remove(id: string) {

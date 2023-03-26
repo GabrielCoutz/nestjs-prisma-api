@@ -29,6 +29,16 @@ export class UserRepository {
     return users;
   }
 
+  async update(id: string, payload: Prisma.UserUpdateInput) {
+    const user = await this.database.user.update({
+      where: { id },
+      data: payload,
+      select: userDefaultSelect,
+    });
+
+    return user;
+  }
+
   async getUnique(id: string) {
     const user = await this.database.user.findUnique({
       where: { id },
