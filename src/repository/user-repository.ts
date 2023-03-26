@@ -48,6 +48,12 @@ export class UserRepository {
     return user;
   }
 
+  async remove(id: string) {
+    await this.database.user.delete({
+      where: { id },
+    });
+  }
+
   async findBy(where: Prisma.UserWhereInput): Promise<number> {
     const result = await this.database.user.count({
       where,
