@@ -29,6 +29,15 @@ export class UserRepository {
     return users;
   }
 
+  async getUnique(id: string) {
+    const user = await this.database.user.findUnique({
+      where: { id },
+      select: userDefaultSelect,
+    });
+
+    return user;
+  }
+
   async findBy(where: Prisma.UserWhereInput): Promise<number> {
     const result = await this.database.user.count({
       where,
