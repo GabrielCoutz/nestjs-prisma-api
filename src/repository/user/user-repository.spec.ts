@@ -49,6 +49,7 @@ describe('UserRepository', () => {
       const result = await userRepository.create(usersMockedList[0]);
 
       expect(result).toStrictEqual(usersMockedList[0]);
+      expect(prismaService.user.create).toHaveBeenCalledTimes(1);
     });
   });
 
@@ -60,6 +61,7 @@ describe('UserRepository', () => {
       );
 
       expect(result).toStrictEqual(usersMockedList[0]);
+      expect(prismaService.user.update).toHaveBeenCalledTimes(1);
     });
   });
 
@@ -68,12 +70,14 @@ describe('UserRepository', () => {
       const result = await userRepository.getUniqueById(usersMockedList[0].id);
 
       expect(result).toStrictEqual(usersMockedList[0]);
+      expect(prismaService.user.findUnique).toHaveBeenCalledTimes(1);
     });
 
     it('should get all users', async () => {
       const result = await userRepository.getAll();
 
       expect(result).toStrictEqual(usersMockedList);
+      expect(prismaService.user.findMany).toHaveBeenCalledTimes(1);
     });
 
     it('should find user by email', async () => {
@@ -82,6 +86,7 @@ describe('UserRepository', () => {
       });
 
       expect(result).toBe(1);
+      expect(prismaService.user.count).toHaveBeenCalledTimes(1);
     });
   });
 
@@ -90,6 +95,7 @@ describe('UserRepository', () => {
       const result = await userRepository.remove(usersMockedList[0].id);
 
       expect(result).toBe(undefined);
+      expect(prismaService.user.delete).toHaveBeenCalledTimes(1);
     });
   });
 });
