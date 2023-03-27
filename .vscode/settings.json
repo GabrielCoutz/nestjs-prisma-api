@@ -15,5 +15,7 @@
     "**/dist": true,
     "dist": true
   },
-  "explorerExclude.backup": {}
+  "explorerExclude.backup": {},
+  "files.eol": "\n",
+  "editor.formatOnSave": true
 }
