@@ -3,9 +3,9 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { UserRepository } from 'src/repository/user/user-repository';
-import { CreateUserDto } from 'src/modules/user/dto/create-user.dto';
-import { UpdateUserDto } from 'src/modules/user/dto/update-user.dto';
+import { UserRepository } from '../../repository/user/user-repository';
+import { CreateUserDto } from '../../modules/user/dto/create-user.dto';
+import { UpdateUserDto } from '../../modules/user/dto/update-user.dto';
 import { PasswordService } from '../../services/password/password.service';
 
 @Injectable()

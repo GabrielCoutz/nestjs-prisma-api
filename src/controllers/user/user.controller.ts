@@ -8,7 +8,7 @@ import {
   Delete,
   HttpCode,
 } from '@nestjs/common';
-import { UserService } from 'src/modules/user/user.service';
+import { UserService } from '../../modules/user/user.service';
 
 import { CreateUserDto } from '../../modules/user/dto/create-user.dto';
 import { UpdateUserDto } from '../../modules/user/dto/update-user.dto';

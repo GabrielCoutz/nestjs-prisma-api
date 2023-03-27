@@ -1,8 +1,8 @@
 import { ConflictException, NotFoundException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
-import { UserRepository } from 'src/repository/user/user-repository';
+import { UserRepository } from '../../repository/user/user-repository';
 
-import { PasswordService } from '../password/password.service';
+import { PasswordService } from '../../services/password/password.service';
 import { UserService } from './user.service';
 
 const usersMockedList = [
@@ -82,11 +82,13 @@ describe('UserService', () => {
       const result = await userService.findOne(usersMockedList[0].id);
 
       expect(result).toStrictEqual(usersMockedList[0]);
-      expect(userRepository.getUnique).toBeCalled();
+      expect(userRepository.getUniqueById).toBeCalled();
     });
 
     it('should throw with user not found', async () => {
-      jest.spyOn(userRepository, 'getUnique').mockResolvedValueOnce(undefined);
+      jest
+        .spyOn(userRepository, 'getUniqueById')
+        .mockResolvedValueOnce(undefined);
 
       expect(userService.findOne(usersMockedList[0].id)).rejects.toThrowError(
         NotFoundException,

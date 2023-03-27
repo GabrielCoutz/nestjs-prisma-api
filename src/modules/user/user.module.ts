@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
-import { UserController } from 'src/controllers/user/user.controller';
+import { UserController } from '../../controllers/user/user.controller';
 
-import { UserService } from 'src/modules/user/user.service';
-import { PasswordService } from 'src/services/password/password.service';
+import { UserService } from '../../modules/user/user.service';
+import { PasswordService } from '../../services/password/password.service';
 import { RepositoryModule } from '../repository/repository.module';
 
 @Module({
