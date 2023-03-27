@@ -3,8 +3,8 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { UserRepository } from 'src/repository/user-repository';
-import { PasswordService } from 'src/services/password/password.service';
+import { UserRepository } from '../repository/user-repository';
+import { PasswordService } from '../services/password/password.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 

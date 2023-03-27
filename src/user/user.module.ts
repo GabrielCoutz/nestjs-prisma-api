@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { UserService } from './user.service';
 import { UserController } from './user.controller';
-import { RepositoryModule } from 'src/modules/repository/repository.module';
-import { PasswordService } from 'src/services/password/password.service';
+import { RepositoryModule } from '../modules/repository/repository.module';
+import { PasswordService } from '../services/password/password.service';
 
 @Module({
   imports: [RepositoryModule],

@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
-import { PrismaService } from 'src/services/prisma.service';
-import { User } from 'src/user/entities/user.entity';
+import { PrismaService } from '../services/prisma.service';
+import { User } from '../user/entities/user.entity';
 import { userDefaultSelect } from './selects/user-default-select';
 
 @Injectable()
