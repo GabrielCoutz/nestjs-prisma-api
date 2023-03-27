@@ -8,9 +8,12 @@ import {
   Delete,
   HttpCode,
 } from '@nestjs/common';
-import { UserService } from './user.service';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
+import { UserService } from '../../modules/user/user.service';
+
+import { CreateUserDto } from '../../modules/user/dto/create-user.dto';
+import { UpdateUserDto } from '../../modules/user/dto/update-user.dto';
+import { JwtAuthGuard } from '../../modules/auth/guard/jwt-auth.guard';
+import { UseGuards } from '@nestjs/common/decorators';
 
 @Controller('users')
 export class UserController {
@@ -31,11 +34,13 @@ export class UserController {
     return this.userService.findOne(id);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     return this.userService.update(id, updateUserDto);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Delete(':id')
   @HttpCode(204)
   remove(@Param('id') id: string) {

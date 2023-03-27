@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { UserService } from '../../modules/user/user.service';
 import { UserController } from './user.controller';
-import { UserService } from './user.service';
 
 const usersMockedList = [
   {
@@ -44,6 +44,7 @@ describe('UserController', () => {
       const result = await userController.create(usersMockedList[0]);
 
       expect(result).toStrictEqual(usersMockedList[0]);
+      expect(userService.create).toHaveBeenCalledTimes(1);
     });
 
     it('should throw with empty fields', async () => {
@@ -56,6 +57,7 @@ describe('UserController', () => {
           password: '',
         }),
       ).rejects.toThrowError();
+      expect(userService.create).toHaveBeenCalledTimes(1);
     });
   });
 
@@ -64,6 +66,7 @@ describe('UserController', () => {
       const result = await userController.update('123', usersMockedList[0]);
 
       expect(result).toStrictEqual(usersMockedList[0]);
+      expect(userService.update).toHaveBeenCalledTimes(1);
     });
 
     it('should throw', async () => {
@@ -76,6 +79,7 @@ describe('UserController', () => {
           password: '',
         }),
       ).rejects.toThrowError();
+      expect(userService.update).toHaveBeenCalledTimes(1);
     });
   });
 
@@ -84,18 +88,21 @@ describe('UserController', () => {
       const result = await userController.findOne('123');
 
       expect(result).toStrictEqual(usersMockedList[0]);
+      expect(userService.findOne).toHaveBeenCalledTimes(1);
     });
 
     it('should get all users', async () => {
       const result = await userController.findAll();
 
       expect(result).toStrictEqual(usersMockedList);
+      expect(userService.findAll).toHaveBeenCalledTimes(1);
     });
 
     it('should throw', async () => {
       jest.spyOn(userService, 'findOne').mockRejectedValueOnce(new Error());
 
       expect(userController.findOne('123')).rejects.toThrowError();
+      expect(userService.findOne).toHaveBeenCalledTimes(1);
     });
   });
 
@@ -104,12 +111,14 @@ describe('UserController', () => {
       const result = await userController.remove('123');
 
       expect(result).toEqual(undefined);
+      expect(userService.remove).toHaveBeenCalledTimes(1);
     });
 
     it('should throw', async () => {
       jest.spyOn(userService, 'remove').mockRejectedValueOnce(new Error());
 
       expect(userController.remove('123')).rejects.toThrowError();
+      expect(userService.remove).toHaveBeenCalledTimes(1);
     });
   });
 });

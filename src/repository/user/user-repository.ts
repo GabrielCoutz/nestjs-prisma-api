@@ -1,8 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
-import { PrismaService } from '../services/prisma.service';
-import { User } from '../user/entities/user.entity';
-import { userDefaultSelect } from './selects/user-default-select';
+import { User } from '../../modules/user/entities/user.entity';
+import { PrismaService } from '../../services/prisma/prisma.service';
+
+import { userDefaultSelect } from '../selects/user-default-select';
 
 @Injectable()
 export class UserRepository {
@@ -39,10 +40,19 @@ export class UserRepository {
     return user;
   }
 
-  async getUnique(id: string) {
+  async getUniqueById(id: string, optionalSelect?: Prisma.UserSelect) {
     const user = await this.database.user.findUnique({
       where: { id },
-      select: userDefaultSelect,
+      select: { ...userDefaultSelect, ...optionalSelect },
+    });
+
+    return user;
+  }
+
+  async getUniqueByEmail(email: string, optionalSelect?: Prisma.UserSelect) {
+    const user = await this.database.user.findUnique({
+      where: { email },
+      select: { ...userDefaultSelect, ...optionalSelect },
     });
 
     return user;

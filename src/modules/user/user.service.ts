@@ -3,10 +3,10 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { UserRepository } from '../repository/user-repository';
-import { PasswordService } from '../services/password/password.service';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
+import { UserRepository } from '../../repository/user/user-repository';
+import { CreateUserDto } from '../../modules/user/dto/create-user.dto';
+import { UpdateUserDto } from '../../modules/user/dto/update-user.dto';
+import { PasswordService } from '../../services/password/password.service';
 
 @Injectable()
 export class UserService {
@@ -48,7 +48,7 @@ export class UserService {
   }
 
   async findOne(id: string) {
-    const user = await this.userRepository.getUnique(id);
+    const user = await this.userRepository.getUniqueById(id);
     if (!user) throw new NotFoundException('User not found');
 
     return user;
