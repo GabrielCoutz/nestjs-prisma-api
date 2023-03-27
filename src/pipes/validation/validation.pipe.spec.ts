@@ -1,4 +1,4 @@
-import { CreateUserDto } from '../../user/dto/create-user.dto';
+import { CreateUserDto } from '../../modules/user/dto/create-user.dto';
 import { ValidationPipe } from './validation.pipe';
 import { ArgumentMetadata, BadRequestException } from '@nestjs/common';
 

@@ -65,7 +65,7 @@ describe('UserRepository', () => {
 
   describe('Get user', () => {
     it('should get unique user', async () => {
-      const result = await userRepository.getUnique(usersMockedList[0].id);
+      const result = await userRepository.getUniqueById(usersMockedList[0].id);
 
       expect(result).toStrictEqual(usersMockedList[0]);
     });
