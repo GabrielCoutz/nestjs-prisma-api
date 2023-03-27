@@ -6,9 +6,16 @@ import { RepositoryModule } from '../repository/repository.module';
 import { LocalStrategy } from './strategies/local.strategy';
 import { AuthController } from 'src/controllers/auth/auth.controller';
 import { PrismaService } from 'src/services/prisma/prisma.service';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
-  imports: [RepositoryModule],
+  imports: [
+    RepositoryModule,
+    JwtModule.register({
+      secret: process.env.JWT_SECRET,
+      signOptions: { expiresIn: '1d' },
+    }),
+  ],
   providers: [
     AuthService,
     PasswordService,
