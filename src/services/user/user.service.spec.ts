@@ -1,7 +1,8 @@
 import { ConflictException, NotFoundException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
-import { UserRepository } from '../repository/user-repository';
-import { PasswordService } from '../services/password/password.service';
+import { UserRepository } from 'src/repository/user/user-repository';
+
+import { PasswordService } from '../password/password.service';
 import { UserService } from './user.service';
 
 const usersMockedList = [
