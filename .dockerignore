@@ -1,0 +1,12 @@
+git
+.vscode
+dist
+node_modules
+.editorconfig
+.env.example
+.eslintrc.js
+.gitignore
+.prettierrc
+DockerFile
+typings.d.ts
+prisma/migrations
