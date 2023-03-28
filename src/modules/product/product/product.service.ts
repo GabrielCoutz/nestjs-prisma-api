@@ -1,6 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { ProductRepository } from 'src/repository/product/product-repository';
 import { CreateProductDto } from '../dto/create-product.dto';
+import { UpdateProductDto } from '../dto/update-product.dto';
 
 @Injectable()
 export class ProductService {
@@ -20,6 +21,13 @@ export class ProductService {
 
   async findUnique(id: string) {
     const product = await this.productRepository.getUnique(id);
+    if (!product) throw new NotFoundException('Product not found');
+
+    return product;
+  }
+
+  async update(id: string, payload: UpdateProductDto) {
+    const product = await this.productRepository.update(id, payload);
     if (!product) throw new NotFoundException('Product not found');
 
     return product;

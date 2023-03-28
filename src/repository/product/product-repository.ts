@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { UpdateProductDto } from 'src/modules/product/dto/update-product.dto';
 import { Product } from 'src/modules/product/entities/product-entity';
 import { PrismaService } from 'src/services/prisma/prisma.service';
 import { productDefaultSelect } from '../selects/product-default-select';
@@ -32,6 +33,16 @@ export class ProductRepository {
   async getUnique(id: string) {
     const product = await this.database.product.findUnique({
       where: { id },
+      select: productDefaultSelect,
+    });
+
+    return product;
+  }
+
+  async update(id: string, payload: UpdateProductDto) {
+    const product = await this.database.product.update({
+      where: { id },
+      data: payload,
       select: productDefaultSelect,
     });
 
