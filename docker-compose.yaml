@@ -24,6 +24,8 @@ services:
     build: .
     command: /bin/bash -c "prisma migrate dev --name init && npm run build && npm run start:prod"
     tty: true
+    volumes:
+      - .:/usr/api/node-api-v1
     container_name: api
     restart: always
     depends_on:
