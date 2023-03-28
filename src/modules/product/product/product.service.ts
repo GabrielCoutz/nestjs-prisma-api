@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { ProductRepository } from 'src/repository/product/product-repository';
 import { CreateProductDto } from '../dto/create-product.dto';
 
@@ -16,5 +16,12 @@ export class ProductService {
     const products = await this.productRepository.getAll();
 
     return products;
+  }
+
+  async findUnique(id: string) {
+    const product = await this.productRepository.getUnique(id);
+    if (!product) throw new NotFoundException('Product not found');
+
+    return product;
   }
 }

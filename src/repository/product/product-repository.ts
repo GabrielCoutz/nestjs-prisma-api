@@ -28,4 +28,13 @@ export class ProductRepository {
 
     return products;
   }
+
+  async getUnique(id: string) {
+    const product = await this.database.product.findUnique({
+      where: { id },
+      select: productDefaultSelect,
+    });
+
+    return product;
+  }
 }

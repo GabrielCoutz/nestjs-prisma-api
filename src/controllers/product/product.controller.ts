@@ -5,6 +5,7 @@ import {
   Body,
   UseGuards,
   Request,
+  Param,
 } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/modules/auth/guard/jwt-auth.guard';
 import { CreateProductDto } from 'src/modules/product/dto/create-product.dto';
@@ -26,5 +27,10 @@ export class ProductController {
   @Get()
   findAll() {
     return this.productService.findAll();
+  }
+
+  @Get(':id')
+  findUnique(@Param('id') id: string) {
+    return this.productService.findUnique(id);
   }
 }
