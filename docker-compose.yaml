@@ -8,10 +8,8 @@ services:
       - ./mysql/:/usr/api/node-api-v1/mysql
     restart: always
     environment:
-      - MYSQL_ROOT_PASSWORD=xampson
+      - MYSQL_ROOT_PASSWORD=senha_root
       - MYSQL_DATABASE=banco-estudos
-      - MYSQL_USER=teste
-      - MYSQL_PASSWORD=xampson
     networks:
       - nestapinetwork
     ports:
