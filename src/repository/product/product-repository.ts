@@ -48,4 +48,10 @@ export class ProductRepository {
 
     return product;
   }
+
+  async delete(id: string) {
+    await this.database.product.delete({
+      where: { id },
+    });
+  }
 }

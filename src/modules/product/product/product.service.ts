@@ -32,4 +32,11 @@ export class ProductService {
 
     return product;
   }
+
+  async delete(id: string) {
+    const productExists = await this.productRepository.getUnique(id);
+    if (!productExists) throw new NotFoundException('Product not found');
+
+    await this.productRepository.delete(id);
+  }
 }

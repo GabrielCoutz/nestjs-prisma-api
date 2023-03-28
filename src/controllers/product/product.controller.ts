@@ -7,6 +7,8 @@ import {
   UseGuards,
   Request,
   Param,
+  Delete,
+  HttpCode,
 } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/modules/auth/guard/jwt-auth.guard';
 import { CreateProductDto } from 'src/modules/product/dto/create-product.dto';
@@ -40,5 +42,12 @@ export class ProductController {
   @Patch(':id')
   update(@Param('id') id: string, @Body() UpdateProductDto: UpdateProductDto) {
     return this.productService.update(id, UpdateProductDto);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Delete(':id')
+  @HttpCode(204)
+  delete(@Param('id') id: string) {
+    return this.productService.delete(id);
   }
 }
