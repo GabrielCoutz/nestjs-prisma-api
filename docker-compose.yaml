@@ -1,0 +1,42 @@
+version: '3'
+
+services:
+  db:
+    image: mysql
+    container_name: db
+    volumes:
+      - ./mysql/:/usr/api/node-api-v1/mysql
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=senha_root
+      - MYSQL_DATABASE=banco-estudos
+    networks:
+      - nestapinetwork
+    ports:
+      - 3306:3306
+    expose:
+      - 3306
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 2s
+      retries: 2
+  api:
+    build: .
+    command: /bin/bash -c "prisma migrate dev --name init && npm run build && npm run start:prod"
+    tty: true
+    volumes:
+      - .:/usr/api/node-api-v1
+    container_name: api
+    restart: always
+    depends_on:
+      db: 
+        condition: service_healthy
+    ports:
+     - 3000:3000
+    expose:
+      - 3000
+    networks:
+      - nestapinetwork
+
+networks:
+  nestapinetwork:

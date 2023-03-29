@@ -123,9 +123,9 @@ describe('UserService', () => {
     it('should throw with user not found', async () => {
       jest.spyOn(userRepository, 'findBy').mockResolvedValueOnce(0);
 
-      expect(userService.remove(usersMockedList[0].id)).rejects.toThrowError(
-        NotFoundException,
-      );
+      expect(
+        userService.update(usersMockedList[0].id, usersMockedList[0]),
+      ).rejects.toThrowError(NotFoundException);
       expect(userRepository.findBy).toBeCalledTimes(1);
     });
   });

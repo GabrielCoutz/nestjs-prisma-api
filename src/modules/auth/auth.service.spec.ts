@@ -68,9 +68,7 @@ describe('AuthService', () => {
     });
 
     it('should return false with email not found', async () => {
-      jest
-        .spyOn(userRepository, 'getUniqueByEmail')
-        .mockResolvedValue(undefined);
+      jest.spyOn(userRepository, 'getUniqueByEmail').mockResolvedValue(null);
 
       const result = await authService.validateUser(
         'any_email',
