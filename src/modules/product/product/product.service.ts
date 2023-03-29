@@ -28,8 +28,10 @@ export class ProductService {
   }
 
   async update(id: string, payload: UpdateProductDto) {
+    const productExists = await this.productRepository.getUnique(id);
+    if (!productExists) throw new NotFoundException('Product not found');
+
     const product = await this.productRepository.update(id, payload);
-    if (!product) throw new NotFoundException('Product not found');
 
     return product;
   }
