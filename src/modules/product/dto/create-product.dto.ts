@@ -9,4 +9,6 @@ export class CreateProductDto extends Product {
   @IsNumber()
   @IsNotEmpty()
   price: number;
+
+  description?: string;
 }
