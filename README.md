@@ -62,15 +62,24 @@ Posteriormente será colocada em uma imagem Docker e disponibilizada publicament
 <h2 id="executar">🚀 Como executar</h2>
 
 - 1° Clone o projeto com `git clone https://github.com/GabrielCoutz/nestjs-prisma-api.git .`
+
 <br>
+
 - 2° Crie um arquivo `.env` com a sua configuração do prisma para conexão com o banco, se baseando no arquivo `.env.example`
 Mais info sobre conexão com o banco: https://www.prisma.io/docs/getting-started/setup-prisma/start-from-scratch/relational-databases/connect-your-database-typescript-mysql
+
 <br>
+
 - 3° Instale as dependências com `npm install`
+
 <br>
+
 - 4° Rode o projeto com `npm run start:dev`
+
 <br>
+
 - 5° Confira a documentação no endpoint `/docs`
+
 ---
 
 <h2 id="author">😎 Entre em contato</h2>
