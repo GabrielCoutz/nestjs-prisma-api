@@ -29,6 +29,12 @@ describe('VadationPipe', () => {
     ).rejects.toThrowError(BadRequestException);
   });
 
+  it('should return without metatype', async () => {
+    const result = await target.transform(<CreateUserDto>userData, {} as any);
+
+    expect(result).toStrictEqual(userData);
+  });
+
   it('should pass and return user data', async () => {
     const result = await target.transform(<CreateUserDto>userData, metadata);
 
