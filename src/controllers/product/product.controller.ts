@@ -21,11 +21,8 @@ export class ProductController {
 
   @UseGuards(JwtAuthGuard)
   @Post()
-  async create(
-    @Request() { user },
-    @Body() CreateProductDto: CreateProductDto,
-  ) {
-    return await this.productService.create(user.userId, CreateProductDto);
+  create(@Request() { user }, @Body() CreateProductDto: CreateProductDto) {
+    return this.productService.create(user.userId, CreateProductDto);
   }
 
   @Get()
