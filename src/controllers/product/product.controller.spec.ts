@@ -1,4 +1,3 @@
-import { BadRequestException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { CreateProductDto } from '../../modules/product/dto/create-product.dto';
 import { ProductService } from '../../modules/product/product/product.service';
