@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { UpdateProductDto } from 'src/modules/product/dto/update-product.dto';
-import { Product } from 'src/modules/product/entities/product-entity';
-import { PrismaService } from 'src/services/prisma/prisma.service';
+import { UpdateProductDto } from '../../modules/product/dto/update-product.dto';
+import { Product } from '../../modules/product/entities/product-entity';
+import { PrismaService } from '../../services/prisma/prisma.service';
 import { productDefaultSelect } from '../selects/product-default-select';
 
 @Injectable()
