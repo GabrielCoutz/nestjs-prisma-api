@@ -6,6 +6,7 @@ import {
   UseGuards,
   HttpCode,
   Body,
+  Get,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger/dist/decorators';
 import {
@@ -32,7 +33,7 @@ export class AuthController {
     return this.authService.login(req.user);
   }
 
-  @Post('validate')
+  @Get('validate')
   @HttpCode(200)
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
