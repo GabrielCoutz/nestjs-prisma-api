@@ -2,7 +2,10 @@ import { Injectable } from '@nestjs/common';
 import { UpdateProductDto } from '../../modules/product/dto/update-product.dto';
 import { Product } from '../../modules/product/entities/product-entity';
 import { PrismaService } from '../../services/prisma/prisma.service';
-import { productDefaultSelect } from '../selects/product-default-select';
+import {
+  productDefaultSelect,
+  productUpdateSelect,
+} from '../selects/product-default-select';
 
 @Injectable()
 export class ProductRepository {
@@ -43,7 +46,7 @@ export class ProductRepository {
     const product = await this.database.product.update({
       where: { id },
       data: payload,
-      select: productDefaultSelect,
+      select: productUpdateSelect,
     });
 
     return product;
