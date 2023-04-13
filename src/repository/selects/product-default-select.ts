@@ -6,7 +6,7 @@ const productProps = {
   description: true,
 };
 
-export const productDefaultSelect = {
+export const productConsultSelect = {
   ...productProps,
   user: {
     select: {
@@ -16,6 +16,6 @@ export const productDefaultSelect = {
   },
 };
 
-export const productUpdateSelect = {
+export const productDefaultSelect = {
   ...productProps,
 };

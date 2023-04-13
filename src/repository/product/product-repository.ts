@@ -3,8 +3,8 @@ import { UpdateProductDto } from '../../modules/product/dto/update-product.dto';
 import { Product } from '../../modules/product/entities/product-entity';
 import { PrismaService } from '../../services/prisma/prisma.service';
 import {
+  productConsultSelect,
   productDefaultSelect,
-  productUpdateSelect,
 } from '../selects/product-default-select';
 
 @Injectable()
@@ -27,7 +27,7 @@ export class ProductRepository {
 
   async getAll() {
     const products = await this.database.product.findMany({
-      select: productDefaultSelect,
+      select: productConsultSelect,
     });
 
     return products;
@@ -46,7 +46,7 @@ export class ProductRepository {
     const product = await this.database.product.update({
       where: { id },
       data: payload,
-      select: productUpdateSelect,
+      select: productDefaultSelect,
     });
 
     return product;
