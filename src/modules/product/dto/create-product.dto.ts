@@ -1,10 +1,4 @@
-import { ProductImages } from '@prisma/client';
-import {
-  IsNotEmpty,
-  IsNumber,
-  IsString,
-  ValidateNested,
-} from 'class-validator';
+import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
 import { Product } from '../entities/product-entity';
 
 export class CreateProductDto extends Product {
@@ -17,8 +11,4 @@ export class CreateProductDto extends Product {
   price: number;
 
   description?: string;
-
-  @ValidateNested()
-  @IsNotEmpty()
-  images: ProductImages[];
 }
