@@ -1,20 +1,21 @@
-export const productDefaultSelect = {
+const productProps = {
   id: true,
   name: true,
   price: true,
   created_at: true,
-<<<<<<< HEAD
-=======
   description: true,
 };
 
-export const productConsultSelect = {
+export const productDefaultSelect = {
   ...productProps,
->>>>>>> parent of eef2560 (feat(product): add images to product)
   user: {
     select: {
       id: true,
       name: true,
     },
   },
+};
+
+export const productUpdateSelect = {
+  ...productProps,
 };
