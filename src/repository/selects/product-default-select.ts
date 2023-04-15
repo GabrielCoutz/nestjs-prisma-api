@@ -4,6 +4,12 @@ const productProps = {
   price: true,
   created_at: true,
   description: true,
+  images: {
+    select: {
+      id: true,
+      url: true,
+    },
+  },
 };
 
 export const productConsultSelect = {

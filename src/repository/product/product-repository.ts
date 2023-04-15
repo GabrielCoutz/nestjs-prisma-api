@@ -11,13 +11,18 @@ import {
 export class ProductRepository {
   constructor(private readonly database: PrismaService) {}
 
-  async create(userId: string, { name, price, description }: Product) {
+  async create(userId: string, { name, price, description, images }: Product) {
     const product = await this.database.product.create({
       data: {
         name,
         price,
         description,
         userId,
+        images: {
+          createMany: {
+            data: images,
+          },
+        },
       },
       select: productDefaultSelect,
     });
@@ -43,9 +48,28 @@ export class ProductRepository {
   }
 
   async update(id: string, payload: UpdateProductDto) {
+    const imagesUpdatePayload = payload?.images?.length
+      ? { data: payload.images }
+      : undefined;
+    const imagesDeletePayload = imagesUpdatePayload
+      ? {
+          productId: {
+            equals: id,
+          },
+        }
+      : undefined;
+
     const product = await this.database.product.update({
       where: { id },
-      data: payload,
+      data: {
+        name: payload.name,
+        description: payload.description,
+        price: payload.price,
+        images: {
+          deleteMany: imagesDeletePayload,
+          createMany: imagesUpdatePayload,
+        },
+      },
       select: productDefaultSelect,
     });
 
